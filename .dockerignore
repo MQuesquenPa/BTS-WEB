@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.gitignore
+README.md
+*.log
+.env
+.env.*
+.vscode
+.idea
+.DS_Store
+
+archivos html a guiarse

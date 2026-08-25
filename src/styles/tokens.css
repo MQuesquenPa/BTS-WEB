@@ -1,0 +1,47 @@
+/**
+ * Design tokens — Purple Wave
+ * Single source of truth for color, type, radius and glow values.
+ * Anything under @theme is auto-exposed as Tailwind utilities
+ * (e.g. --color-purple -> bg-purple / text-purple / border-purple).
+ */
+
+:root {
+  --container-max: 1360px;
+}
+
+@theme {
+  /* Surfaces */
+  --color-background: #08080b;
+  --color-background-secondary: #101016;
+  --color-surface: #17171f;
+  --color-elevated: #1d1d28;
+
+  /* Text */
+  --color-foreground: #f8f8fc;
+  --color-foreground-muted: #a7a7b4;
+
+  /* Brand */
+  --color-purple: #8054ff;
+  --color-purple-light: #b49cff;
+  --color-purple-deep: #3e2e66;
+  --color-lavender: #ded5ff;
+  --color-accent: #ff315c;
+
+  /* Borders */
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-kr: 'Noto Sans KR', ui-sans-serif, sans-serif;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* Shadows / glow */
+  --shadow-glow-purple: 0 0 24px rgba(128, 84, 255, 0.35);
+  --shadow-glow-purple-sm: 0 0 12px rgba(128, 84, 255, 0.22);
+}
