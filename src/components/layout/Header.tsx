@@ -18,17 +18,17 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-lg">
-      <Container className="flex items-center justify-between gap-6 py-4">
+      <Container className="flex items-center justify-between gap-3 py-4 sm:gap-6">
         <Link
           to={ROUTES.home}
-          className="flex items-center gap-2 font-display text-lg font-bold tracking-tight"
+          className="flex items-center gap-2 whitespace-nowrap font-display text-base font-bold tracking-tight sm:text-lg"
           onClick={() => setIsMenuOpen(false)}
         >
-          <span className="h-2.5 w-2.5 rounded-full bg-purple shadow-glow-purple-sm" aria-hidden="true" />
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-purple shadow-glow-purple-sm" aria-hidden="true" />
           PURPLE WAVE
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Navegación principal">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegación principal">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.to}
@@ -48,14 +48,14 @@ export function Header() {
           <button
             type="button"
             aria-label="Buscar"
-            className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light md:inline-flex"
+            className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light lg:inline-flex"
           >
             <Search size={18} aria-hidden="true" />
           </button>
           <Link
             to={ROUTES.wishlist}
             aria-label="Wishlist"
-            className="flex min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light"
+            className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light sm:flex"
           >
             <Heart size={18} aria-hidden="true" />
           </Link>
@@ -70,7 +70,7 @@ export function Header() {
             type="button"
             aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isMenuOpen}
-            className="flex min-h-11 min-w-11 items-center justify-center rounded-full text-foreground md:hidden"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-full text-foreground lg:hidden"
             onClick={() => setIsMenuOpen((open) => !open)}
           >
             {isMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
@@ -79,7 +79,7 @@ export function Header() {
       </Container>
 
       {isMenuOpen ? (
-        <nav className="flex flex-col gap-1 border-t border-border px-6 pb-6 pt-2 md:hidden" aria-label="Navegación móvil">
+        <nav className="flex flex-col gap-1 border-t border-border px-6 pb-6 pt-2 lg:hidden" aria-label="Navegación móvil">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.to}
@@ -94,6 +94,17 @@ export function Header() {
               {link.label}
             </NavLink>
           ))}
+          <NavLink
+            to={ROUTES.wishlist}
+            onClick={() => setIsMenuOpen(false)}
+            className={({ isActive }) =>
+              `flex min-h-11 items-center rounded-lg px-2 font-display text-lg sm:hidden ${
+                isActive ? 'text-purple-light' : 'text-foreground'
+              }`
+            }
+          >
+            Wishlist
+          </NavLink>
         </nav>
       ) : null}
     </header>
