@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { ROUTES } from '@/constants/routes'
 import { LIMA_2026_DATES_LABEL, LIMA_2026_FIRST_SHOW_ISO, LIMA_2026_VENUE } from '@/constants/event'
 import { useCountdown } from '@/hooks/useCountdown'

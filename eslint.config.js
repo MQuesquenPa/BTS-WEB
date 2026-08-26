@@ -6,7 +6,8 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  globalIgnores(['dist']),
+  // build/client + build/server: production output. .react-router: generated route typegen.
+  globalIgnores(['dist', 'build', '.react-router']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -21,11 +22,15 @@ export default tseslint.config(
     },
   },
   {
-    // Router config file: only exports a `router` instance, not a component —
-    // fast refresh doesn't apply here.
-    files: ['src/app/AppRouter.tsx'],
+    // React Router route modules (src/root.tsx + every page under src/pages/)
+    // export `meta` (and, later, `loader`/`action`/etc.) alongside the default
+    // component — that's the framework's convention, not a fast-refresh bug.
+    files: ['src/root.tsx', 'src/pages/**/*.tsx'],
     rules: {
-      'react-refresh/only-export-components': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowExportNames: ['meta', 'links', 'loader', 'action', 'handle', 'shouldRevalidate', 'ErrorBoundary', 'HydrateFallback'] },
+      ],
     },
   },
 )

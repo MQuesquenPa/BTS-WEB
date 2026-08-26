@@ -14,6 +14,9 @@ build
 *.local
 *.tsbuildinfo
 
+# React Router Framework Mode generated route types
+.react-router/
+
 # Development-only reference material (Claude Design Canvas prototype).
 # Not part of the app, never imported from production.
 archivos html a guiarse/

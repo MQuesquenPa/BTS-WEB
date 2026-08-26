@@ -20,9 +20,17 @@ function diffToParts(diffMs: number): CountdownParts {
   }
 }
 
-/** Ticks every second towards `targetIso`. Returns all-zero once it's passed. */
+/**
+ * Ticks every second towards `targetIso`. Returns all-zero once it's passed.
+ *
+ * Always starts at `ZERO` on both the prerendered/first-hydration render and the
+ * very first client render — the real value is only computed inside `useEffect`,
+ * which never runs during prerender. This keeps the initial client markup
+ * byte-for-byte identical to the prerendered HTML and avoids a React hydration
+ * text-mismatch warning (the "real" time at build differs from the visitor's).
+ */
 export function useCountdown(targetIso: string): CountdownParts {
-  const [parts, setParts] = useState(() => diffToParts(new Date(targetIso).getTime() - Date.now()))
+  const [parts, setParts] = useState<CountdownParts>(ZERO)
 
   useEffect(() => {
     const targetMs = new Date(targetIso).getTime()

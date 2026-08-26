@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Container } from '@/components/common/Container'
 import { ROUTES } from '@/constants/routes'
 
@@ -29,8 +29,10 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-10 pb-12 sm:grid-cols-4">
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.title}>
-              <h2 className="mb-4 font-display text-sm font-bold tracking-wide">{column.title.toUpperCase()}</h2>
-              <ul className="flex flex-col gap-2.5">
+              <p id={`footer-${column.title.toLowerCase()}`} className="mb-4 font-display text-sm font-bold tracking-wide">
+                {column.title.toUpperCase()}
+              </p>
+              <ul aria-labelledby={`footer-${column.title.toLowerCase()}`} className="flex flex-col gap-2.5">
                 {column.links.map((link) => (
                   <li key={link.to}>
                     <Link to={link.to} className="text-sm text-foreground-muted transition-colors hover:text-purple-light">
