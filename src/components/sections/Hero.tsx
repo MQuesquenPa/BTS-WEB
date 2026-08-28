@@ -11,8 +11,18 @@ const COUNTDOWN_UNITS = [
   { key: 'seconds', label: 'SEGUNDOS' },
 ] as const
 
-// Rough silhouette skyline echoing the seven members, tallest near the center.
-const SILHOUETTE_HEIGHTS = [88, 128, 104, 156, 108, 132, 92]
+// Vite resolves this at build time. With no matching file it's just `{}` —
+// the build never fails and never imports a path that doesn't exist. The
+// moment hero-desktop.webp / hero-mobile.webp land in
+// src/assets/images/hero/, HeroBackground picks them up automatically, with
+// no code change. See the Fase 3.3 report for the full rationale.
+const HERO_ARTWORK = import.meta.glob('/src/assets/images/hero/hero-{desktop,mobile}.webp', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+const HERO_DESKTOP_SRC = HERO_ARTWORK['/src/assets/images/hero/hero-desktop.webp']
+const HERO_MOBILE_SRC = HERO_ARTWORK['/src/assets/images/hero/hero-mobile.webp']
 
 export function Hero() {
   const countdown = useCountdown(LIMA_2026_FIRST_SHOW_ISO)
@@ -27,38 +37,7 @@ export function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-32 text-center sm:pt-36">
-      {/* Background: purple/red glow + faint vertical grid */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-20"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 50% 15%, rgba(128,84,255,0.24), transparent 70%), ' +
-            'radial-gradient(ellipse 60% 50% at 15% 85%, rgba(255,49,92,0.08), transparent 70%), ' +
-            'var(--color-background)',
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-20 opacity-40"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 90px)',
-        }}
-      />
-
-      {/* Background: member silhouette skyline fading into the base */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[42%]">
-        <div className="flex h-full items-end justify-center gap-1.5 sm:gap-2">
-          {SILHOUETTE_HEIGHTS.map((height, index) => (
-            <span
-              key={index}
-              className="w-9 rounded-t-full bg-gradient-to-b from-surface to-background sm:w-14"
-              style={{ height }}
-            />
-          ))}
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-transparent" />
-      </div>
+      <HeroBackground />
 
       <motion.span {...fadeUp} transition={{ duration: 0.5 }} className="font-kr text-xs tracking-[0.14em] text-purple-light">
         보라해
@@ -117,5 +96,85 @@ export function Hero() {
 
       <p className="mt-6 text-xs text-foreground-muted">Fan-made merchandise creada en Perú para ARMY.</p>
     </section>
+  )
+}
+
+// Rough silhouette skyline echoing the seven members, tallest near the center.
+// Part of the CSS-only fallback — deleted in one pass once HERO_DESKTOP_SRC exists.
+const SILHOUETTE_HEIGHTS = [88, 128, 104, 156, 108, 132, 92]
+
+/**
+ * Everything behind the text content. Two mutually exclusive branches:
+ *  - Artwork found (HERO_DESKTOP_SRC set): <picture> + two subtle overlays.
+ *  - No artwork yet: today's CSS-only glow/grid/silhouette treatment.
+ * Only one Hero exists either way — this just isolates the swappable part.
+ */
+function HeroBackground() {
+  if (HERO_DESKTOP_SRC) {
+    return (
+      <>
+        <picture aria-hidden="true" className="pointer-events-none absolute inset-0 -z-30">
+          {HERO_MOBILE_SRC ? <source media="(max-width: 767px)" srcSet={HERO_MOBILE_SRC} /> : null}
+          <img
+            src={HERO_DESKTOP_SRC}
+            alt=""
+            loading="eager"
+            fetchPriority="high"
+            className="h-full w-full object-cover"
+          />
+        </picture>
+
+        {/* Legibility fade: darkens top and bottom just enough for text/CTAs to
+            stay readable regardless of what's under them, and blends the
+            section into the page background below. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-background/55 via-transparent to-background"
+        />
+        {/* Ambient brand wash — intentionally faint; the artwork carries the mood. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-20"
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 18%, rgba(128,84,255,0.16), transparent 70%)' }}
+        />
+      </>
+    )
+  }
+
+  return (
+    <>
+      {/* Background: purple/red glow + faint vertical grid */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-20"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 60% at 50% 15%, rgba(128,84,255,0.24), transparent 70%), ' +
+            'radial-gradient(ellipse 60% 50% at 15% 85%, rgba(255,49,92,0.08), transparent 70%), ' +
+            'var(--color-background)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-20 opacity-40"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 90px)',
+        }}
+      />
+
+      {/* Background: member silhouette skyline fading into the base */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[42%]">
+        <div className="flex h-full items-end justify-center gap-1.5 sm:gap-2">
+          {SILHOUETTE_HEIGHTS.map((height, index) => (
+            <span
+              key={index}
+              className="w-9 rounded-t-full bg-gradient-to-b from-surface to-background sm:w-14"
+              style={{ height }}
+            />
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-transparent" />
+      </div>
+    </>
   )
 }
