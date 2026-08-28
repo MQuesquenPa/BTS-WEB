@@ -3,6 +3,17 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import { Container } from '@/components/common/Container'
 import { ROUTES } from '@/constants/routes'
+import { useCartStore } from '@/store/cartStore'
+import { useWishlistStore } from '@/store/wishlistStore'
+
+function IconBadge({ count }: { count: number }) {
+  if (count <= 0) return null
+  return (
+    <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-purple px-1 text-[10px] font-semibold text-foreground">
+      {count}
+    </span>
+  )
+}
 
 const NAV_LINKS = [
   { label: 'Shop', to: ROUTES.shop },
@@ -15,6 +26,8 @@ const NAV_LINKS = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const wishlistCount = useWishlistStore((state) => state.productIds.length)
+  const cartCount = useCartStore((state) => state.itemCount())
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-lg">
@@ -55,16 +68,18 @@ export function Header() {
           <Link
             to={ROUTES.wishlist}
             aria-label="Wishlist"
-            className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light sm:flex"
+            className="relative hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light sm:flex"
           >
             <Heart size={18} aria-hidden="true" />
+            <IconBadge count={wishlistCount} />
           </Link>
           <Link
             to={ROUTES.cart}
             aria-label="Carrito"
-            className="flex min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light"
+            className="relative flex min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light"
           >
             <ShoppingBag size={18} aria-hidden="true" />
+            <IconBadge count={cartCount} />
           </Link>
           <button
             type="button"

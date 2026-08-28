@@ -21,6 +21,10 @@ build
 # Not part of the app, never imported from production.
 archivos html a guiarse/
 
+# Temporary visual references — local only, not licensed for production.
+# Production assets live in src/assets/images/ and ARE versioned normally.
+referencias-visuales/
+
 # Environment variables
 .env
 .env.*

@@ -2,6 +2,7 @@ import { Outlet } from 'react-router'
 import { AnnouncementBar } from '@/components/layout/AnnouncementBar'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { Toast } from '@/components/common/Toast'
 
 // Default export required: this file is referenced directly as a route module
 // (see routes.ts) and React Router Framework Mode renders a route's component
@@ -15,6 +16,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <Toast />
     </div>
   )
 }
