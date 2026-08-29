@@ -17,7 +17,6 @@ const FOOTER_COLUMNS = [
     links: [
       { label: 'About', to: ROUTES.about },
       { label: 'News', to: ROUTES.news },
-      { label: 'Wishlist', to: ROUTES.wishlist },
     ],
   },
 ]

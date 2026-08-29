@@ -3,7 +3,10 @@ import type { MetaFunction } from 'react-router'
 import { Hero } from '@/components/sections/Hero'
 import { ArmyPicks } from '@/components/sections/ArmyPicks'
 import { BiasSelector } from '@/components/sections/BiasSelector'
+import { FAQ } from '@/components/sections/FAQ'
 import { LimaCollection } from '@/components/sections/LimaCollection'
+import { MembersPreview } from '@/components/sections/MembersPreview'
+import { Newsletter } from '@/components/sections/Newsletter'
 import { QuickView } from '@/components/product/QuickView'
 import { ROUTES } from '@/constants/routes'
 import { DEFAULT_DESCRIPTION, pageTitle } from '@/constants/site'
@@ -22,6 +25,9 @@ export default function HomePage() {
       <ArmyPicks onQuickView={setQuickViewProduct} />
       <BiasSelector onQuickView={setQuickViewProduct} />
       <LimaCollection onQuickView={setQuickViewProduct} />
+      <MembersPreview />
+      <FAQ />
+      <Newsletter />
       <QuickView product={quickViewProduct} onClose={() => setQuickViewProduct(null)} />
     </>
   )
