@@ -78,23 +78,26 @@ export function Hero() {
       <motion.div
         {...fadeUp}
         transition={{ duration: 0.5, delay: 0.32 }}
-        className="mt-9 flex flex-wrap justify-center gap-4"
+        className="mx-auto mt-9 flex w-full max-w-[280px] flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-[14px]"
       >
         <Link
           to={ROUTES.lima2026}
-          className="inline-flex min-h-11 items-center justify-center rounded-xl bg-purple px-7 py-3.5 text-sm font-semibold tracking-[0.02em] text-foreground shadow-glow-purple transition-colors hover:bg-purple-light"
+          className="inline-flex h-[52px] w-full items-center justify-center rounded-xl bg-purple px-7 text-sm font-semibold tracking-[0.02em] text-foreground transition-all hover:-translate-y-0.5 hover:brightness-110 sm:w-auto"
+          style={{ boxShadow: '0 0 12px rgba(128,84,255,0.18)' }}
         >
           VER COLECCIÓN LIMA
         </Link>
         <Link
           to={ROUTES.customize}
-          className="inline-flex min-h-11 items-center justify-center rounded-xl border border-border px-7 py-3.5 text-sm font-semibold tracking-[0.02em] text-foreground transition-colors hover:border-purple-light hover:text-purple-light"
+          className="inline-flex h-[52px] w-full items-center justify-center rounded-xl px-7 text-sm font-semibold tracking-[0.02em] text-foreground transition-all hover:-translate-y-0.5 hover:border-purple-light hover:text-purple-light
+            bg-white/[0.04] border border-white/[0.12]
+            sm:w-auto sm:bg-transparent sm:border-white/20"
         >
           PERSONALIZA TU MERCH
         </Link>
       </motion.div>
 
-      <p className="mt-6 text-xs text-foreground-muted">Fan-made merchandise creada en Perú para ARMY.</p>
+      <p className="mt-8 text-xs text-foreground-muted">Fan-made merchandise creada en Perú para ARMY.</p>
     </section>
   )
 }
