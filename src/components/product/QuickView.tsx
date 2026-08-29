@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import { Modal } from '@/components/common/Modal'
 import { ProductImage } from '@/components/product/ProductImage'
+import { QuantityStepper } from '@/components/product/QuantityStepper'
 import { VariantPicker } from '@/components/product/VariantPicker'
 import { useCartStore } from '@/store/cartStore'
 import { useToastStore } from '@/store/toastStore'
@@ -74,25 +75,7 @@ function QuickViewContent({ product, onClose }: { product: Product; onClose: () 
 
         <div className="flex items-center gap-3">
           <span className="text-xs tracking-[0.08em] text-foreground-muted">CANTIDAD</span>
-          <div className="flex items-center gap-3 rounded-lg border border-border px-1">
-            <button
-              type="button"
-              onClick={() => setQuantity((qty) => Math.max(1, qty - 1))}
-              aria-label="Reducir cantidad"
-              className="flex min-h-11 min-w-9 items-center justify-center text-lg"
-            >
-              −
-            </button>
-            <span className="min-w-4 text-center text-sm">{quantity}</span>
-            <button
-              type="button"
-              onClick={() => setQuantity((qty) => qty + 1)}
-              aria-label="Aumentar cantidad"
-              className="flex min-h-11 min-w-9 items-center justify-center text-lg"
-            >
-              +
-            </button>
-          </div>
+          <QuantityStepper quantity={quantity} onChange={setQuantity} />
         </div>
 
         <div className="mt-1 flex flex-col gap-2">

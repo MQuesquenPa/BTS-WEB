@@ -1,4 +1,5 @@
-import type { BiasSlug } from '@/types/member'
+// Relative import — see the note in src/data/products.ts.
+import type { BiasSlug } from './member.ts'
 
 export type ProductCategory = 'tee' | 'hoodie' | 'accessory' | 'bag'
 export type ProductStyle = 'concert' | 'minimal' | 'purple' | 'lima' | 'typography'

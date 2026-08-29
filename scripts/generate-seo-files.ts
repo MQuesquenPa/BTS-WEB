@@ -5,7 +5,7 @@
 import { writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { loadEnv } from 'vite'
-import { PUBLIC_STATIC_ROUTES } from '../src/constants/seo-routes.ts'
+import { getAllIndexableRoutes } from '../src/constants/seo-routes.ts'
 
 const rootDir = path.resolve(import.meta.dirname, '..')
 const env = loadEnv('production', rootDir, 'VITE_')
@@ -23,10 +23,11 @@ if (siteUrl) {
 writeFileSync(path.join(outDir, 'robots.txt'), `${robotsLines.join('\n')}\n`)
 
 if (siteUrl) {
-  const urlEntries = PUBLIC_STATIC_ROUTES.map((route) => `  <url><loc>${siteUrl}${route}</loc></url>`).join('\n')
+  const routes = getAllIndexableRoutes()
+  const urlEntries = routes.map((route) => `  <url><loc>${siteUrl}${route}</loc></url>`).join('\n')
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}\n</urlset>\n`
   writeFileSync(path.join(outDir, 'sitemap.xml'), sitemap)
-  console.log(`[seo] sitemap.xml generado con ${PUBLIC_STATIC_ROUTES.length} rutas en ${outDir}.`)
+  console.log(`[seo] sitemap.xml generado con ${routes.length} rutas en ${outDir}.`)
 } else {
   console.log('[seo] VITE_SITE_URL no configurado — sitemap.xml NO se genera (evitamos URLs inventadas).')
 }

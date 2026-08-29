@@ -1,4 +1,7 @@
-import type { Product } from '@/types/product'
+// Relative import (not `@/*`): also loaded from react-router.config.ts /
+// scripts/generate-seo-files.ts via seo-routes.ts, under tsconfig.node.json,
+// which doesn't define the alias.
+import type { Product } from '../types/product.ts'
 
 const BLACK = { name: 'Negro', hex: '#171720' }
 const PURPLE = { name: 'Purple', hex: '#8054FF' }
