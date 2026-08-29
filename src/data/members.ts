@@ -1,4 +1,5 @@
-import type { Member } from '@/types/member'
+// Relative import — see the note in src/data/products.ts.
+import type { Member } from '../types/member.ts'
 
 // No `photo` set for any member yet — every entry falls back to the
 // gradient + initial placeholder until a licensed portrait lands in
@@ -9,10 +10,10 @@ export const MEMBERS: Member[] = [
   { slug: 'rm', stage: 'RM', role: 'Líder · Rapero', initial: 'RM', gradient: 'linear-gradient(155deg, #3E2E66, #8054FF)' },
   { slug: 'jin', stage: 'Jin', role: 'Vocalista', initial: 'JIN', gradient: 'linear-gradient(155deg, #8054FF, #B49CFF)' },
   { slug: 'suga', stage: 'SUGA', role: 'Productor · Rapero', initial: 'SG', gradient: 'linear-gradient(155deg, #17171F, #3E2E66)' },
-  { slug: 'jhope', stage: 'j-hope', role: 'Bailarín principal', initial: 'JH', gradient: 'linear-gradient(155deg, #B49CFF, #DED5FF)' },
+  { slug: 'j-hope', stage: 'j-hope', role: 'Bailarín principal', initial: 'JH', gradient: 'linear-gradient(155deg, #B49CFF, #DED5FF)' },
   { slug: 'jimin', stage: 'Jimin', role: 'Vocalista', initial: 'JM', gradient: 'linear-gradient(155deg, #FF315C, #8054FF)' },
   { slug: 'v', stage: 'V', role: 'Vocalista', initial: 'V', gradient: 'linear-gradient(155deg, #08080B, #6B46C7)' },
-  { slug: 'jungkook', stage: 'Jung Kook', role: 'Vocalista', initial: 'JK', gradient: 'linear-gradient(155deg, #8054FF, #FF315C)' },
+  { slug: 'jung-kook', stage: 'Jung Kook', role: 'Vocalista', initial: 'JK', gradient: 'linear-gradient(155deg, #8054FF, #FF315C)' },
 ]
 
 export function findMember(slug: string) {

@@ -1,4 +1,4 @@
-export type MemberSlug = 'rm' | 'jin' | 'suga' | 'jhope' | 'jimin' | 'v' | 'jungkook'
+export type MemberSlug = 'rm' | 'jin' | 'suga' | 'j-hope' | 'jimin' | 'v' | 'jung-kook'
 
 export type BiasSlug = MemberSlug | 'ot7'
 
