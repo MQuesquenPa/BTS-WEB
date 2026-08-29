@@ -1,37 +1,44 @@
 import { Container } from '@/components/common/Container'
 
-// Kept neutral on anything we haven't actually decided (shipping times,
-// contact channels) instead of inventing specific commercial policies —
-// see the Fase 4.2 report.
 const FAQ_ITEMS = [
   {
     question: '¿Es merch oficial de BTS?',
     answer:
-      'No. Purple Wave es un proyecto fan-made, sin afiliación oficial con BTS, BIGHIT MUSIC o HYBE. Cada pieza está inspirada en el fandom, no producida ni licenciada por ellos.',
+      'No. Purple Wave es un proyecto fan-made, sin afiliación oficial con BTS, BIGHIT MUSIC o HYBE. Cada pieza está inspirada en el fandom y producida de forma independiente en Perú.',
   },
   {
-    question: '¿Puedo personalizar mi merch?',
+    question: '¿Puedo personalizar mi polo?',
     answer:
-      'Sí — estamos construyendo un personalizador propio. Mientras tanto, puedes explorar el avance en la sección Personaliza.',
+      'Sí. Nuestro plus principal es que puedes crear tu polo oversized con tu foto y tu integrante favorito. Elige el color base, sube la foto y nosotros hacemos el diseño. La opción está disponible en la sección Personaliza.',
+  },
+  {
+    question: '¿Cuánto demoran los pedidos?',
+    answer:
+      'Los productos personalizados tienen un tiempo estimado de 5–7 días aprox. desde que confirmas. En Lima puede ser menor. Para provincias el plazo puede variar según destino y operador de envío. Los productos en stock están disponibles según talla y color — el tiempo de entrega se coordina contigo según tu ubicación.',
   },
   {
     question: '¿Qué tallas manejan?',
     answer:
-      'La mayoría de prendas van de S a XL; los accesorios suelen ser talla única. Cada producto muestra sus tallas disponibles en su propia ficha.',
+      'Los polos oversized van de S a XL. Los accesorios son talla única. Cada producto indica sus tallas disponibles en su ficha.',
+  },
+  {
+    question: '¿Envían a todo el Perú?',
+    answer:
+      'Sí, enviamos a todo el Perú. El costo de delivery es aparte y se coordina contigo según tu ubicación antes de confirmar el pedido.',
+  },
+  {
+    question: '¿Cuál es la diferencia entre productos en stock y bajo pedido?',
+    answer:
+      'Los productos en stock están listos y se despachan rápido. Los bajo pedido (como los personalizados) se producen desde cero después de que confirmas tu pedido — por eso llevan más tiempo pero son piezas únicas.',
   },
   {
     question: '¿Purple Wave vende entradas para Lima 2026?',
     answer:
-      'No — solo merch fan-made inspirado en las fechas del BTS World Tour en Lima (07, 09 y 10 de octubre de 2026, Estadio San Marcos). Las entradas se gestionan por los canales oficiales del tour.',
+      'No, solo merch fan-made inspirado en las fechas del BTS World Tour Lima 2026 (07, 09 y 10 de octubre, Estadio San Marcos). Las entradas las gestiona el operador oficial del tour.',
   },
   {
-    question: '¿Cuánto demora el envío?',
-    answer:
-      'Cada pieza es fan-made y se produce bajo pedido. Los tiempos y zonas de envío se confirman antes de completar tu compra.',
-  },
-  {
-    question: '¿Cómo los contacto?',
-    answer: 'Escríbenos desde la sección About — ahí encontrarás la forma más rápida de comunicarte con nosotros.',
+    question: '¿Cómo las contacto?',
+    answer: 'Escríbenos desde la sección About. Respondemos lo antes posible.',
   },
 ]
 

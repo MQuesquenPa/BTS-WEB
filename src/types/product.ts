@@ -4,6 +4,7 @@ import type { BiasSlug } from './member.ts'
 export type ProductCategory = 'tee' | 'hoodie' | 'accessory' | 'bag'
 export type ProductStyle = 'concert' | 'minimal' | 'purple' | 'lima' | 'typography'
 export type ProductSize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'Único'
+export type FulfillmentType = 'ready-stock' | 'made-to-order'
 
 export interface ProductColor {
   name: string
@@ -39,4 +40,10 @@ export interface Product {
   gradient: string
   rating?: number
   reviewsCount?: number
+
+  // --- COMMERCIAL MODEL ---
+  /** How the piece is fulfilled: ready from stock or made to order. */
+  fulfillment: FulfillmentType
+  /** Whether the buyer can personalize this piece (photo + bias). */
+  customizable: boolean
 }

@@ -15,6 +15,7 @@ import { findProduct, PRODUCTS } from '@/data/products'
 import { useCartStore } from '@/store/cartStore'
 import { useToastStore } from '@/store/toastStore'
 import { useWishlistStore } from '@/store/wishlistStore'
+import { DELIVERY_COPY, FULFILLMENT_LABEL, SHIPPING_COPY } from '@/constants/commerce'
 import type { Product, ProductSize } from '@/types/product'
 
 export const meta: MetaFunction = ({ params }) => {
@@ -48,8 +49,8 @@ export default function ProductPage() {
 // display-only mock numbers, not real reviews — surfacing them as review
 // schema would be exactly the fabricated markup the spec forbids), no sku,
 // no brand entity, no image unless a real photo exists. `availability` is
-// InStock because that reflects how the site actually behaves today — every
-// listed product can be added to the cart, nothing here gates on real stock.
+// intentionally omitted — the site has no real stock source, so declaring
+// InStock would be fabricated markup.
 function buildProductJsonLd(product: Product) {
   return {
     '@context': 'https://schema.org',
@@ -61,9 +62,45 @@ function buildProductJsonLd(product: Product) {
       '@type': 'Offer',
       price: product.price.toFixed(2),
       priceCurrency: 'PEN',
-      availability: 'https://schema.org/InStock',
     },
   }
+}
+
+function ProductInfoBlock({ product }: { product: Product }) {
+  const isMto = product.fulfillment === 'made-to-order'
+  const fulfillmentLabel = FULFILLMENT_LABEL[product.fulfillment]
+  const deliveryCopy = isMto ? DELIVERY_COPY.madeToOrder : DELIVERY_COPY.readyStock
+
+  return (
+    <div className="rounded-xl border border-border bg-surface/50 p-4">
+      <div className="flex flex-wrap gap-2">
+        {isMto ? (
+          <span className="rounded-full bg-purple/20 px-3 py-1 text-[11px] font-semibold tracking-[0.06em] text-purple-light">
+            {fulfillmentLabel}
+          </span>
+        ) : (
+          <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-semibold tracking-[0.06em] text-emerald-400">
+            {fulfillmentLabel}
+          </span>
+        )}
+        {product.customizable ? (
+          <span className="rounded-full bg-accent/15 px-3 py-1 text-[11px] font-semibold tracking-[0.06em] text-accent">
+            Personalizable
+          </span>
+        ) : null}
+      </div>
+      <dl className="mt-3 flex flex-col gap-1.5 text-xs text-foreground-muted">
+        <div className="flex gap-2">
+          <dt className="shrink-0 font-medium text-foreground/70">Entrega</dt>
+          <dd>{deliveryCopy}</dd>
+        </div>
+        <div className="flex gap-2">
+          <dt className="shrink-0 font-medium text-foreground/70">Envío</dt>
+          <dd>{SHIPPING_COPY}</dd>
+        </div>
+      </dl>
+    </div>
+  )
 }
 
 function relatedProducts(product: Product, all: Product[]): Product[] {
@@ -145,6 +182,8 @@ function ProductDetail({ product }: { product: Product }) {
             <span className="font-display text-2xl">S/ {product.price.toFixed(2)}</span>
             <p className="text-sm leading-relaxed text-foreground-muted">{product.description}</p>
 
+            <ProductInfoBlock product={product} />
+
             <VariantPicker
               colors={product.colors}
               selectedColor={selectedColor}
@@ -162,6 +201,15 @@ function ProductDetail({ product }: { product: Product }) {
               <span className="text-xs tracking-[0.08em] text-foreground-muted">CANTIDAD</span>
               <QuantityStepper quantity={quantity} onChange={setQuantity} />
             </div>
+
+            {product.customizable && (
+              <Link
+                to={ROUTES.customize}
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-purple px-6 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-purple-light"
+              >
+                Personalizar mi polo →
+              </Link>
+            )}
 
             <div className="mt-1 flex flex-col gap-3 sm:flex-row">
               <button

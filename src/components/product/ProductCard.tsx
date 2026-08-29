@@ -44,6 +44,10 @@ export function ProductCard({
           <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-background/70 px-3 py-1 text-[10px] font-semibold tracking-[0.06em] text-lavender backdrop-blur-sm">
             {product.badge}
           </span>
+        ) : product.customizable ? (
+          <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-accent/80 px-3 py-1 text-[10px] font-semibold tracking-[0.06em] text-background backdrop-blur-sm">
+            Personalizable
+          </span>
         ) : null}
 
         <button
