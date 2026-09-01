@@ -56,7 +56,7 @@ const FAQ_JSON_LD = {
 
 export function FAQ() {
   return (
-    <section className="py-14 sm:py-20">
+    <section id="faq" className="scroll-mt-24 py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
       <Container className="max-w-3xl">
         <div className="mb-8 text-center sm:mb-10">
