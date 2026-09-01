@@ -19,6 +19,7 @@ export function AnnouncementBar() {
         className="absolute right-2 top-1/2 flex min-h-8 min-w-8 -translate-y-1/2 items-center justify-center rounded-full text-lavender/80 transition-colors hover:text-foreground"
       >
         <X size={14} aria-hidden="true" />
+        <span className="sr-only">Cerrar aviso</span>
       </button>
     </div>
   )

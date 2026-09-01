@@ -125,7 +125,7 @@ function BiasButton({ label, initial, gradient, photo, isSelected, onSelect }: B
           <>
             <img
               src={photo}
-              alt=""
+              alt={`${label}, integrante de BTS`}
               loading="lazy"
               className="h-full w-full object-cover object-top"
               style={{ filter: 'grayscale(0.25) contrast(1.08) saturate(0.9)' }}

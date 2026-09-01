@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://purplewave.pe/sitemap.xml

@@ -68,7 +68,12 @@ function MemberDetail({ member }: { member: Member }) {
             style={{ background: member.gradient }}
           >
             {member.photo ? (
-              <img src={member.photo} alt="" loading="eager" className="h-full w-full object-cover" />
+              <img
+                src={member.photo}
+                alt={`${member.stage}, integrante de BTS`}
+                loading="eager"
+                className="h-full w-full object-cover"
+              />
             ) : (
               <span
                 aria-hidden="true"

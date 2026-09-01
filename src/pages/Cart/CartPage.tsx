@@ -56,8 +56,10 @@ export default function CartPage() {
               >
                 <Link
                   to={ROUTES.product(product.slug)}
+                  aria-label={product.name}
                   className="h-24 w-24 shrink-0 overflow-hidden rounded-xl sm:h-28 sm:w-28"
                 >
+                  <span className="sr-only">{product.name}</span>
                   <ProductImage product={product} />
                 </Link>
 

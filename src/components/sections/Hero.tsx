@@ -97,7 +97,9 @@ export function Hero() {
         </Link>
       </motion.div>
 
-      <p className="mt-8 text-xs text-foreground-muted">Fan-made merchandise creada en Perú para ARMY.</p>
+      <p className="mt-8 text-xs text-foreground-muted">
+        Colección fan-made creada en Perú para ARMY, inspirada en BTS y el Purple Ocean de Lima 2026.
+      </p>
     </section>
   )
 }

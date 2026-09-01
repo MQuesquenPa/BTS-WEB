@@ -61,6 +61,7 @@ export function Modal({ isOpen, onClose, title, children, className = '' }: Moda
           className="absolute right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-background/60 text-foreground transition-colors hover:text-purple-light"
         >
           <X size={18} aria-hidden="true" />
+          <span className="sr-only">Cerrar</span>
         </button>
         {children}
       </div>

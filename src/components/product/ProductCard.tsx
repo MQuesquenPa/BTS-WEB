@@ -35,6 +35,7 @@ export function ProductCard({
     <article className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-transform duration-300 ease-out hover:-translate-y-1 ${className}`}>
       <div className={`relative overflow-hidden ${aspectClassName}`}>
         <Link to={`/product/${product.slug}`} className="block h-full w-full" aria-label={product.name}>
+          <span className="sr-only">{product.name}</span>
           <div className="h-full w-full transition-transform duration-300 ease-out group-hover:scale-[1.04]">
             <ProductImage product={product} priority={priority} />
           </div>
@@ -58,6 +59,7 @@ export function ProductCard({
           className="absolute right-3 top-3 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-background/60 text-foreground transition-colors hover:text-purple-light"
         >
           <Heart size={17} aria-hidden="true" fill={isWishlisted ? 'currentColor' : 'none'} className={isWishlisted ? 'text-accent' : ''} />
+          <span className="sr-only">{isWishlisted ? 'Quitar de tu Purple List' : 'Guardar en tu Purple List'}</span>
         </button>
 
         <button

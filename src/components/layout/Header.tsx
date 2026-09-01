@@ -64,6 +64,7 @@ export function Header() {
             className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light lg:inline-flex"
           >
             <Search size={18} aria-hidden="true" />
+            <span className="sr-only">Buscar</span>
           </button>
           <Link
             to={ROUTES.wishlist}
@@ -71,6 +72,7 @@ export function Header() {
             className="relative hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light sm:flex"
           >
             <Heart size={18} aria-hidden="true" />
+            <span className="sr-only">Ver favoritos</span>
             <IconBadge count={wishlistCount} />
           </Link>
           <Link
@@ -79,6 +81,7 @@ export function Header() {
             className="relative flex min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light"
           >
             <ShoppingBag size={18} aria-hidden="true" />
+            <span className="sr-only">Ver Purple Bag</span>
             <IconBadge count={cartCount} />
           </Link>
           <button
@@ -89,6 +92,7 @@ export function Header() {
             onClick={() => setIsMenuOpen((open) => !open)}
           >
             {isMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            <span className="sr-only">{isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}</span>
           </button>
         </div>
       </Container>

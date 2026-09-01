@@ -241,6 +241,7 @@ export default function ShopPage() {
             </button>
           ) : null}
         </div>
+        <h2 className="sr-only">Catálogo</h2>
 
         {results.length > 0 ? (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
