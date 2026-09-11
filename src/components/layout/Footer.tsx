@@ -12,11 +12,9 @@ const LINK_GROUPS = [
     ],
   },
   {
+    // News is paused for the MVP (Fase 10) — not linked here, route stays intact.
     title: 'Explore',
-    links: [
-      { label: 'Members', to: ROUTES.members },
-      { label: 'News', to: ROUTES.news },
-    ],
+    links: [{ label: 'Members', to: ROUTES.members }],
   },
   {
     title: 'Purple Wave',
@@ -99,7 +97,7 @@ export function Footer() {
                 Nuevas colecciones, Lima y drops Purple Wave.
               </p>
               <Link
-                to={ROUTES.home}
+                to="/#newsletter"
                 className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-purple-light transition-colors hover:text-lavender focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-light"
               >
                 Únete →

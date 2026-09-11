@@ -5,11 +5,13 @@ import { ROUTES } from '@/constants/routes'
 import { pageTitle } from '@/constants/site'
 import { buildMeta } from '@/lib/meta'
 
+// News is paused for the MVP (Fase 10) — see NewsPage.tsx.
 export const meta: MetaFunction = ({ params }) =>
   buildMeta({
     title: pageTitle('Noticia'),
     description: 'Artículo de Bangtan News: contexto, cuerpo de la nota y fuente.',
     path: ROUTES.newsDetail(params.slug ?? ''),
+    robots: 'noindex, follow',
   })
 
 export default function NewsDetailPage() {

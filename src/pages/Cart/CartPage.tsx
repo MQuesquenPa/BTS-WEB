@@ -6,6 +6,7 @@ import { ProductImage } from '@/components/product/ProductImage'
 import { QuantityStepper } from '@/components/product/QuantityStepper'
 import { ROUTES } from '@/constants/routes'
 import { pageTitle } from '@/constants/site'
+import { formatCurrency } from '@/lib/currency'
 import { buildMeta } from '@/lib/meta'
 import { PRODUCTS } from '@/data/products'
 import { useCartStore } from '@/store/cartStore'
@@ -86,7 +87,7 @@ export default function CartPage() {
                   <div className="mt-auto flex items-center justify-between">
                     <QuantityStepper quantity={item.quantity} onChange={(quantity) => updateQuantity(item, quantity)} />
                     <span className="font-display text-sm font-semibold sm:text-base">
-                      S/ {(product.price * item.quantity).toFixed(2)}
+                      {formatCurrency(product.price * item.quantity)}
                     </span>
                   </div>
                 </div>
@@ -98,7 +99,7 @@ export default function CartPage() {
             <h2 className="font-display text-lg font-bold">Resumen</h2>
             <div className="mt-4 flex items-center justify-between text-sm text-foreground-muted">
               <span>Subtotal</span>
-              <span className="font-semibold text-foreground">S/ {subtotal.toFixed(2)}</span>
+              <span className="font-semibold text-foreground">{formatCurrency(subtotal)}</span>
             </div>
             <p className="mt-2 text-xs text-foreground-muted">Envío y totales finales se calculan al continuar.</p>
             <Link

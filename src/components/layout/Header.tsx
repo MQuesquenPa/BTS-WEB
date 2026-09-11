@@ -1,4 +1,4 @@
-import { Heart, Menu, Search, ShoppingBag, X } from 'lucide-react'
+import { Heart, Menu, ShoppingBag, X } from 'lucide-react'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import { Container } from '@/components/common/Container'
@@ -15,11 +15,12 @@ function IconBadge({ count }: { count: number }) {
   )
 }
 
+// News is paused for the MVP (Fase 10) — not deleted, just not linked from
+// public navigation. See ROUTES.news / NewsPage for the still-existing route.
 const NAV_LINKS = [
   { label: 'Shop', to: ROUTES.shop },
   { label: 'Lima 2026', to: ROUTES.lima2026 },
   { label: 'Members', to: ROUTES.members },
-  { label: 'News', to: ROUTES.news },
   { label: 'Personaliza', to: ROUTES.customize },
   { label: 'About', to: ROUTES.about },
 ]
@@ -58,14 +59,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1">
-          <button
-            type="button"
-            aria-label="Buscar"
-            className="hidden min-h-11 min-w-11 items-center justify-center rounded-full text-foreground transition-colors hover:text-purple-light lg:inline-flex"
-          >
-            <Search size={18} aria-hidden="true" />
-            <span className="sr-only">Buscar</span>
-          </button>
           <Link
             to={ROUTES.wishlist}
             aria-label="Wishlist"

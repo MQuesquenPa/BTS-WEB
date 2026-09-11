@@ -18,7 +18,7 @@ export function Newsletter() {
   }
 
   return (
-    <section className="relative overflow-hidden py-16 sm:py-24">
+    <section id="newsletter" className="relative scroll-mt-24 overflow-hidden py-16 sm:py-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"

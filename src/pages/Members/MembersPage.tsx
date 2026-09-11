@@ -1,11 +1,10 @@
 import type { MetaFunction } from 'react-router'
-import { Link } from 'react-router'
 import { Container } from '@/components/common/Container'
+import { MemberCard } from '@/components/member/MemberCard'
 import { ROUTES } from '@/constants/routes'
 import { pageTitle } from '@/constants/site'
 import { buildMeta } from '@/lib/meta'
 import { MEMBERS } from '@/data/members'
-import type { Member } from '@/types/member'
 
 export const meta: MetaFunction = () =>
   buildMeta({
@@ -14,69 +13,75 @@ export const meta: MetaFunction = () =>
     path: ROUTES.members,
   })
 
-// RM (line-up order [0], MEMBERS.ts) gets the featured editorial slot as the
-// group's leader — everyone else fills a smaller, slightly varied grid so
-// the page doesn't read as seven identical cards.
+// RM (line-up order [0]) gets the featured slot — but only from `lg:` up
+// (see MemberCard). Below that it's just member #1 in the same 2-column
+// grid as everyone else, so there's no duplicated markup per breakpoint.
 export default function MembersPage() {
-  const [leader, ...rest] = MEMBERS
-
   return (
-    <Container className="py-12 sm:py-16">
-      <div className="mb-10 max-w-lg">
-        <h1 className="font-display text-4xl font-bold sm:text-5xl">MEET THE SEVEN</h1>
-        <p className="mt-3 text-sm text-foreground-muted sm:text-base">
-          Siete voces, un mismo Purple Ocean. Elige un integrante y descubre su colección.
-        </p>
-      </div>
+    <div className="relative overflow-hidden">
+      <MembersAtmosphere />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {leader ? (
-          <MemberTile
-            member={leader}
-            aspect="aspect-[16/10] sm:aspect-[21/9]"
-            className="sm:col-span-2 lg:col-span-3"
-            featured
-          />
-        ) : null}
-        {rest.map((member, index) => (
-          <MemberTile key={member.slug} member={member} aspect={index % 3 === 1 ? 'aspect-[4/5]' : 'aspect-square'} />
-        ))}
-      </div>
-    </Container>
+      <Container className="relative py-16 sm:py-20">
+        <div className="mb-12 flex flex-col items-center gap-3 text-center sm:mb-16">
+          <span className="font-display text-xs italic tracking-[0.1em] text-purple-light/80">
+            — Better together
+          </span>
+          <h1 className="font-display text-5xl font-bold sm:text-6xl lg:text-7xl">MEET THE SEVEN</h1>
+          <span aria-hidden="true" className="h-px w-12 bg-purple-light/40" />
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-lavender sm:text-base">
+            Seven voices. Seven stories. <span className="text-purple-light">One purple ocean.</span>
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-5">
+          {MEMBERS.map((member, index) => (
+            <MemberCard
+              key={member.slug}
+              member={member}
+              index={index}
+              featured={index === 0}
+              className={index === 0 ? 'lg:col-span-3' : ''}
+            />
+          ))}
+        </div>
+      </Container>
+    </div>
   )
 }
 
-function MemberTile({
-  member,
-  aspect = 'aspect-square',
-  className = '',
-  featured = false,
-}: {
-  member: Member
-  aspect?: string
-  className?: string
-  featured?: boolean
-}) {
+// Purple-haze concert-editorial atmosphere behind the whole section — three
+// soft glows, two blurred light streaks, and the same fractal-noise texture
+// ProductImage.tsx already uses for its placeholder mockups (reused for
+// consistency rather than inventing a second noise technique). Pure CSS/SVG,
+// no image assets.
+function MembersAtmosphere() {
   return (
-    <Link
-      to={ROUTES.memberDetail(member.slug)}
-      className={`group relative block overflow-hidden rounded-2xl border border-border transition-transform duration-300 hover:-translate-y-1 ${aspect} ${className}`}
-      style={{ background: member.gradient }}
-    >
-      <span
-        aria-hidden="true"
-        className={`absolute inset-0 flex items-center justify-center font-display font-bold text-foreground/90 transition-transform duration-300 group-hover:scale-105 ${
-          featured ? 'text-7xl sm:text-9xl' : 'text-5xl'
-        }`}
-      >
-        {member.initial}
-      </span>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/80 to-transparent p-4 sm:p-5">
-        <span className={`block font-display font-bold ${featured ? 'text-2xl sm:text-4xl' : 'text-lg'}`}>
-          {member.stage}
-        </span>
-        <span className="text-xs text-foreground-muted sm:text-sm">{member.role}</span>
-      </div>
-    </Link>
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 15% 0%, rgba(128,84,255,0.32), transparent 70%), ' +
+            'radial-gradient(ellipse 55% 50% at 90% 24%, rgba(255,49,92,0.13), transparent 70%), ' +
+            'radial-gradient(ellipse 70% 55% at 50% 105%, rgba(128,84,255,0.26), transparent 70%), ' +
+            'radial-gradient(ellipse 40% 35% at 50% 8%, rgba(180,156,255,0.22), transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute -left-1/4 top-0 h-[140%] w-1/3 rotate-[10deg] opacity-[0.09] blur-3xl"
+        style={{ background: 'linear-gradient(180deg, transparent, #B49CFF, transparent)' }}
+      />
+      <div
+        className="absolute -right-1/4 top-1/3 h-[120%] w-1/4 -rotate-[12deg] opacity-[0.07] blur-3xl"
+        style={{ background: 'linear-gradient(180deg, transparent, #8054FF, transparent)' }}
+      />
+      <div
+        className="absolute inset-0 opacity-[0.025] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+    </div>
   )
 }

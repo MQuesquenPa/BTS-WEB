@@ -707,7 +707,10 @@ function StepSummary({ state, onEdit }: { state: CustomDesignState; onEdit: () =
 
   const summaryText = buildOrderSummaryText(state)
   const waMessage = buildWhatsAppMessage(state)
-  const waUrl = WHATSAPP_NUMBER ? buildWhatsAppUrl(WHATSAPP_NUMBER, waMessage) : '+51956975212'
+  // No hardcoded fallback number — if VITE_WHATSAPP_NUMBER isn't configured,
+  // waUrl must be undefined so the "canal directo próximamente" branch below
+  // actually renders instead of linking to a broken, non-wa.me href.
+  const waUrl = WHATSAPP_NUMBER ? buildWhatsAppUrl(WHATSAPP_NUMBER, waMessage) : undefined
   const hasPhotos = Boolean(state.customerPhoto ?? state.artistReference)
 
   async function handleCopy() {

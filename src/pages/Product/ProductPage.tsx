@@ -10,6 +10,7 @@ import { QuickView } from '@/components/product/QuickView'
 import { VariantPicker } from '@/components/product/VariantPicker'
 import { ROUTES } from '@/constants/routes'
 import { pageTitle } from '@/constants/site'
+import { formatCurrency } from '@/lib/currency'
 import { buildMeta } from '@/lib/meta'
 import { findProduct, PRODUCTS } from '@/data/products'
 import { useCartStore } from '@/store/cartStore'
@@ -179,7 +180,7 @@ function ProductDetail({ product }: { product: Product }) {
             </div>
 
             <h1 className="font-display text-3xl font-bold leading-tight sm:text-4xl">{product.name}</h1>
-            <span className="font-display text-2xl">S/ {product.price.toFixed(2)}</span>
+            <span className="font-display text-2xl">{formatCurrency(product.price)}</span>
             <p className="text-sm leading-relaxed text-foreground-muted">{product.description}</p>
 
             <ProductInfoBlock product={product} />

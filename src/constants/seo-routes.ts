@@ -7,7 +7,11 @@ import { PRODUCTS } from '../data/products.ts'
 
 /**
  * Public, indexable, prerenderable routes with no dynamic data — the static
- * shell of the site.
+ * shell of the site. `/news` is intentionally excluded while News is paused
+ * for the MVP (Fase 10) — the route itself still exists and is reachable
+ * client-side, it's just out of the build-time prerender and out of
+ * sitemap.xml (both single-sourced from this list). Add it back when News
+ * relaunches.
  */
 export const PUBLIC_STATIC_ROUTES = [
   '/',
@@ -15,7 +19,6 @@ export const PUBLIC_STATIC_ROUTES = [
   '/customize',
   '/members',
   '/lima-2026',
-  '/news',
   '/about',
 ] as const
 

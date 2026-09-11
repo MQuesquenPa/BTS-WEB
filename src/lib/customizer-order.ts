@@ -1,6 +1,10 @@
 import { STYLE_OPTIONS } from '@/constants/customizer'
 import type { CustomDesignState } from '@/constants/customizer'
 
+// Re-exported for existing consumers (CustomizerWizard.tsx) — the actual
+// implementation lives in lib/whatsapp.ts, shared with Checkout.
+export { buildWhatsAppUrl, WHATSAPP_NUMBER } from '@/lib/whatsapp'
+
 export function buildOrderSummaryText(state: CustomDesignState): string {
   const styleName = STYLE_OPTIONS.find((s) => s.id === state.style)?.name ?? '—'
 
@@ -51,12 +55,3 @@ export function buildWhatsAppMessage(state: CustomDesignState): string {
 
   return lines.join('\n')
 }
-
-export function buildWhatsAppUrl(phoneNumber: string, message: string): string {
-  const clean = phoneNumber.replace(/\D/g, '')
-  return `https://wa.me/${clean}?text=${encodeURIComponent(message)}`
-}
-
-// Empty string → undefined so the WhatsApp CTA is hidden when the var is unset or blank.
-const raw = import.meta.env['VITE_WHATSAPP_NUMBER'] as string | undefined
-export const WHATSAPP_NUMBER: string | undefined = raw?.trim() || undefined

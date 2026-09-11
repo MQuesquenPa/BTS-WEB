@@ -1,6 +1,7 @@
 import { Heart } from 'lucide-react'
 import { Link } from 'react-router'
 import { ProductImage } from '@/components/product/ProductImage'
+import { formatCurrency } from '@/lib/currency'
 import { useToastStore } from '@/store/toastStore'
 import { useWishlistStore } from '@/store/wishlistStore'
 import type { Product } from '@/types/product'
@@ -76,7 +77,7 @@ export function ProductCard({
           <h3 className="line-clamp-1 font-display text-base">{product.name}</h3>
         </Link>
         <div className="mt-auto flex items-center justify-between">
-          <span className="font-display text-lg font-semibold">S/ {product.price.toFixed(2)}</span>
+          <span className="font-display text-lg font-semibold">{formatCurrency(product.price)}</span>
           <div className="flex gap-1" aria-hidden="true">
             {product.colors.map((color) => (
               <span

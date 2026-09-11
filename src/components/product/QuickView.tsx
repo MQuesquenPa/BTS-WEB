@@ -4,6 +4,7 @@ import { Modal } from '@/components/common/Modal'
 import { ProductImage } from '@/components/product/ProductImage'
 import { QuantityStepper } from '@/components/product/QuantityStepper'
 import { VariantPicker } from '@/components/product/VariantPicker'
+import { formatCurrency } from '@/lib/currency'
 import { useCartStore } from '@/store/cartStore'
 import { useToastStore } from '@/store/toastStore'
 import type { Product, ProductSize } from '@/types/product'
@@ -57,7 +58,7 @@ function QuickViewContent({ product, onClose }: { product: Product; onClose: () 
           </span>
         ) : null}
         <h3 className="font-display text-xl font-bold leading-tight">{product.name}</h3>
-        <span className="-mt-3 font-display text-lg">S/ {product.price.toFixed(2)}</span>
+        <span className="-mt-3 font-display text-lg">{formatCurrency(product.price)}</span>
         <p className="text-sm leading-relaxed text-foreground-muted">{product.description}</p>
 
         <VariantPicker
